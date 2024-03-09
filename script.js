@@ -20,13 +20,13 @@ const songs = [
     }, 
     {
         name: 'jacinto-3', 
-        displayName: 'Unknown', 
+        displayName: 'Goodnight, Disco Queen', 
         artist: 'Jacinto Design'
     }, 
     {
         name: 'metric-1', 
-        displayName: 'Unknown', 
-        artist: 'Unknown'
+        displayName: 'Front Row (Remix)', 
+        artist: 'Metric/Jacinto Design'
     }, 
 ];
 
@@ -60,5 +60,32 @@ function loadSong(song) {
     image.src = `img/${song.name}.jpg`
 }
 
+// Current Song
+let songIndex = 0;
+
+// Previous Song
+function prevSong() {
+    songIndex--;
+    if (songIndex < 0) {
+        songIndex = songs.length - 1;
+    }
+    loadSong(songs[songIndex]);
+    playSong();
+}
+
+// Next Song
+function nextSong() {
+    songIndex++;
+    if (songIndex > songs.length - 1) {
+        songIndex = 0;
+    }
+    loadSong(songs[songIndex]);
+    playSong();
+}
+
 // On Load - Select First Song
-loadSong(songs[0]);
+loadSong(songs[songIndex]);
+
+// Event Listeners
+prevBtn.addEventListener('click', prevSong);
+nextBtn.addEventListener('click', nextSong);
